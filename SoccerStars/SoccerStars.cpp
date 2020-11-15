@@ -1,7 +1,6 @@
 #include "SoccerStars.hpp"
 
-SoccerStars::SoccerStars(){
-    manager= GameManager();
+SoccerStars::SoccerStars() : manager() {
     run();
 }
 
