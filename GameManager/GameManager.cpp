@@ -1,8 +1,9 @@
 #include "GameManager.hpp"
 
-GameManager::GameManager() {
+void GameManager::initialize_window(){
     window = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
     set_up_background();
+    // window->play_music(MAIN_MUSIC_PATH);
     window->update_screen();
 }
 
@@ -11,11 +12,13 @@ void GameManager::set_up_background() {
     return;
 }
 
+void GameManager::release_all_alloc_memory(){
+    delete window;
+}
+
 void GameManager::run() {
     bool quit = false;
     SDL_Event event;
-    window->draw_rect(Rectangle(100, 100, 200, 200));
-    window->update_screen();
     while (!quit) {
         SDL_WaitEvent(&event);
 
@@ -25,6 +28,6 @@ void GameManager::run() {
                 break;
         }
     }
-
+    release_all_alloc_memory();
     SDL_Quit();
 }

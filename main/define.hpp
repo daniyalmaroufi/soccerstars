@@ -5,5 +5,6 @@
 #define GAME_WIDTH 800
 #define GAME_HEIGHT 480
 #define BACKGROUND_PATH "../Assets/field.jpg"
+#define MAIN_MUSIC_PATH "../Assets/music.mp3"
 
 #endif

@@ -8,9 +8,11 @@
 
 class GameManager {
    public:
-    GameManager();
+    GameManager(){};
     void run();
+    void initialize_window();
     void set_up_background();
+    void release_all_alloc_memory();
 
    private:
     Window* window;
