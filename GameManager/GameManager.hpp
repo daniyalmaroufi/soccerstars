@@ -14,7 +14,6 @@ class GameManager {
 
    private:
     Window* window;
-    std::string background_path = BACKGROUND_PATH;
 };
 
 #endif

@@ -7,7 +7,7 @@ GameManager::GameManager() {
 }
 
 void GameManager::set_up_background() {
-    window->draw_img(background_path);
+    window->draw_img(BACKGROUND_PATH);
     return;
 }
 
