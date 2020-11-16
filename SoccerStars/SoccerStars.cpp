@@ -1,11 +1,10 @@
 #include "SoccerStars.hpp"
 
-SoccerStars::SoccerStars() : manager() {}
+SoccerStars::SoccerStars() {}
 
 void SoccerStars::run() {
-    manager.initialize_window();
-    manager.initial_players(blue_players, red_players);
-    manager.run();
+    initialize_window();
+    run_the_game();
     return;
 }
 
@@ -24,12 +23,44 @@ void SoccerStars::read_initial_players_position() {
     int x, y;
     for (int i = 0; i < NUMBER_OF_TEAM_PLAYERS; i++) {
         fin >> x >> y;
-        blue_players.push_back(Point(x, y));
+        blue_players.push_back(new Player(Point(x, y), PLAYER1_PATH));
     }
     for (int i = 0; i < NUMBER_OF_TEAM_PLAYERS; i++) {
         fin >> x >> y;
-        red_players.push_back(Point(x, y));
+        red_players.push_back(new Player(Point(x, y), PLAYER2_PATH));
     }
 
     fin.close();
+}
+
+void SoccerStars::initialize_window() {
+    win = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
+    set_up_background();
+    win->update_screen();
+}
+
+void SoccerStars::set_up_background() {
+    win->draw_img(BACKGROUND_PATH);
+    return;
+}
+
+void SoccerStars::release_all_alloc_memory() { delete win; }
+
+void SoccerStars::run_the_game() {
+    for (auto player : blue_players) player->draw(win);
+    for (auto player : red_players) player->draw(win);
+    win->update_screen();
+    bool quit = false;
+    SDL_Event event;
+    while (!quit) {
+        SDL_WaitEvent(&event);
+
+        switch (event.type) {
+            case SDL_QUIT:
+                quit = true;
+                break;
+        }
+    }
+    release_all_alloc_memory();
+    SDL_Quit();
 }

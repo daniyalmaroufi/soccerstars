@@ -8,7 +8,7 @@
 
 class Player {
    public:
-    Player(int x, int y, std::string image_dir);
+    Player(Point position_, std::string image_dir);
     Player(){};
     void draw(Window *win);
     void update(Window *win);

@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
-Player::Player(int x, int y, std::string image_dir) {
-    position = Point(x, y);
+Player::Player(Point position_, std::string image_dir) {
+    position = position_;
     player_image = image_dir;
 }
 
