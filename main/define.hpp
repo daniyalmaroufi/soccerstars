@@ -10,5 +10,6 @@
 #define NUMBER_OF_TEAM_PLAYERS 5
 #define PLAYER1_PATH "../Assets/Player1.png"
 #define PLAYER2_PATH "../Assets/Player2.png"
+#define GAME_DELAY 15
 
 #endif

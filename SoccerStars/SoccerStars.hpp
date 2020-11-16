@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <ctime>
 
 #include "../main/define.hpp"
 #include "../Player/Player.hpp"
@@ -22,6 +23,7 @@ class SoccerStars {
     void initialize_window();
     void set_up_background();
     void release_all_alloc_memory();
+    void draw();
 
    private:
     Window* win;

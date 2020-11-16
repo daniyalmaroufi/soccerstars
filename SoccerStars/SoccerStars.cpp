@@ -35,8 +35,6 @@ void SoccerStars::read_initial_players_position() {
 
 void SoccerStars::initialize_window() {
     win = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
-    set_up_background();
-    win->update_screen();
 }
 
 void SoccerStars::set_up_background() {
@@ -46,20 +44,26 @@ void SoccerStars::set_up_background() {
 
 void SoccerStars::release_all_alloc_memory() { delete win; }
 
-void SoccerStars::run_the_game() {
+void SoccerStars::draw() {
+    set_up_background();
+    win->update_screen();
     for (auto player : blue_players) player->draw(win);
     for (auto player : red_players) player->draw(win);
     win->update_screen();
+}
+
+void SoccerStars::run_the_game() {
     bool quit = false;
     SDL_Event event;
+    draw();
     while (!quit) {
         SDL_WaitEvent(&event);
-
         switch (event.type) {
             case SDL_QUIT:
                 quit = true;
                 break;
         }
+        delay(GAME_DELAY);
     }
     release_all_alloc_memory();
     SDL_Quit();
