@@ -3,7 +3,7 @@
 void GameManager::initialize_window(){
     window = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
     set_up_background();
-    // window->play_music(MAIN_MUSIC_PATH);
+    window->play_music(MAIN_MUSIC_PATH);
     window->update_screen();
 }
 

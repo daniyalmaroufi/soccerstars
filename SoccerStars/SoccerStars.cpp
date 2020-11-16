@@ -1,12 +1,9 @@
 #include "SoccerStars.hpp"
 
-SoccerStars::SoccerStars() : manager() {
-    get_rounds_number();
-    get_goals_number();
-    manager.initialize_window();
-}
+SoccerStars::SoccerStars() : manager() {}
 
 void SoccerStars::run() {
+    manager.initialize_window();
     manager.run();
     return;
 }

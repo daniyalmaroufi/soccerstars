@@ -12,9 +12,9 @@ using namespace std;
 class SoccerStars {
    public:
     SoccerStars();
+    void run();
     void get_rounds_number();
     void get_goals_number();
-    void run();
 
    private:
     GameManager manager;
