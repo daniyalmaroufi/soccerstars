@@ -3,9 +3,6 @@
 void GameManager::initialize_window() {
     win = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
     set_up_background();
-    // win->play_music(MAIN_MUSIC_PATH);
-    Player dani(30, 50, "../Assets/Player1.png");
-    dani.draw(win);
     win->update_screen();
 }
 
