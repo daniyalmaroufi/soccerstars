@@ -31,5 +31,5 @@ obj/SoccerStars.o: $(SOCCER_STARS_DIR)SoccerStars.hpp $(SOCCER_STARS_DIR)SoccerS
 	$(CPP) -c $(SOCCER_STARS_DIR)SoccerStars.cpp -o obj/SoccerStars.o
 
 clean:
-	rm -r *.o
+	rm -r *.out
 	rm -r obj/*.o

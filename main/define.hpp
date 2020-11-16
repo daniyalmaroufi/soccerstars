@@ -7,5 +7,9 @@
 #define BACKGROUND_PATH "../Assets/field.jpg"
 #define MAIN_MUSIC_PATH "../Assets/music.mp3"
 #define PLAYER_SIZE 15
+#define PLAYERS_INITIAL_POSITION "./players_initial_position.txt"
+#define NUMBER_OF_TEAM_PLAYERS 5
+#define PLAYER1_PATH "../Assets/Player1.png"
+#define PLAYER2_PATH "../Assets/Player2.png"
 
 #endif
