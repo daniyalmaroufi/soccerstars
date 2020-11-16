@@ -1,19 +1,21 @@
 #include "GameManager.hpp"
 
 void GameManager::initialize_window(){
-    window = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
+    win = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
     set_up_background();
-    window->play_music(MAIN_MUSIC_PATH);
-    window->update_screen();
+    // win->play_music(MAIN_MUSIC_PATH);
+    Player dani(30,50,"../Assets/Player1.png");
+    dani.draw(win);
+    win->update_screen();
 }
 
 void GameManager::set_up_background() {
-    window->draw_img(BACKGROUND_PATH);
+    win->draw_img(BACKGROUND_PATH);
     return;
 }
 
 void GameManager::release_all_alloc_memory(){
-    delete window;
+    delete win;
 }
 
 void GameManager::run() {

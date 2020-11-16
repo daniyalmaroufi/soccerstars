@@ -5,6 +5,7 @@
 
 #include "../RSDL/rsdl.hpp"
 #include "../main/define.hpp"
+#include "../Player/Player.hpp"
 
 class GameManager {
    public:
@@ -15,7 +16,7 @@ class GameManager {
     void release_all_alloc_memory();
 
    private:
-    Window* window;
+    Window* win;
 };
 
 #endif
