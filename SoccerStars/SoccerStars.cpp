@@ -5,7 +5,6 @@ SoccerStars::SoccerStars() {}
 void SoccerStars::run() {
     initialize_window();
     run_the_game();
-    return;
 }
 
 void SoccerStars::get_rounds_number() {
@@ -45,11 +44,15 @@ void SoccerStars::set_up_background() {
 void SoccerStars::release_all_alloc_memory() { delete win; }
 
 void SoccerStars::draw() {
+    win->clear();
     set_up_background();
+    draw_players();
     win->update_screen();
+}
+
+void SoccerStars::draw_players(){
     for (auto player : blue_players) player->draw(win);
     for (auto player : red_players) player->draw(win);
-    win->update_screen();
 }
 
 void SoccerStars::run_the_game() {
@@ -67,4 +70,5 @@ void SoccerStars::run_the_game() {
     }
     release_all_alloc_memory();
     SDL_Quit();
+
 }

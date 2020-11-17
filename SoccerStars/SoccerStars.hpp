@@ -24,6 +24,7 @@ class SoccerStars {
     void set_up_background();
     void release_all_alloc_memory();
     void draw();
+    void draw_players();
 
    private:
     Window* win;

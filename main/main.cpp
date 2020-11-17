@@ -12,5 +12,6 @@ int main()
     game.get_goals_number();
     game.read_initial_players_position();
     game.run();
+    cout<<"\n\nGame Finished!"<<endl;
     return 0;
 }
