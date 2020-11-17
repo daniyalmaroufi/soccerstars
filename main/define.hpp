@@ -11,5 +11,9 @@
 #define PLAYER1_PATH "../Assets/Player1.png"
 #define PLAYER2_PATH "../Assets/Player2.png"
 #define GAME_DELAY 15
+#define BALL_IMAGE "../Assets/ball.png"
+#define BALL_SIZE 10
+#define BALL_INITIAL_X 400
+#define BALL_INITIAL_Y 240
 
 #endif

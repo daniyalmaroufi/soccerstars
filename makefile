@@ -7,14 +7,15 @@ GAME_MANAGER_DIR=GameManager/
 SOCCER_STARS_DIR=SoccerStars/
 PLAYER_DIR=Player/
 BODY_DIR=Body/
+BALL_DIR=Ball/
 
 
 CPP=$(CPP_EXEC) $(CPP_STD) $(CPP_FLAGS)
 
 all: soccerStars.out
 
-soccerStars.out: obj/main.o obj/rsdl.o obj/SoccerStars.o obj/Body.o obj/Player.o
-	$(CPP) obj/main.o obj/rsdl.o obj/SoccerStars.o obj/Body.o obj/Player.o $(RSDL_FLAGS) -o soccerStars.out
+soccerStars.out: obj/main.o obj/rsdl.o obj/SoccerStars.o obj/Body.o obj/Player.o obj/Ball.o
+	$(CPP) obj/main.o obj/rsdl.o obj/SoccerStars.o obj/Body.o obj/Player.o obj/Ball.o $(RSDL_FLAGS) -o soccerStars.out
 
 obj/main.o: main/main.cpp $(RSDL_DIR)rsdl.hpp
 	$(CPP) -c main/main.cpp -o obj/main.o
@@ -27,6 +28,9 @@ obj/Player.o: $(PLAYER_DIR)Player.hpp $(PLAYER_DIR)Player.cpp
 
 obj/Body.o: $(BODY_DIR)Body.hpp $(BODY_DIR)Body.cpp
 	$(CPP) -c $(BODY_DIR)Body.cpp -o obj/Body.o
+
+obj/Ball.o: $(BALL_DIR)Ball.hpp $(BALL_DIR)Ball.cpp
+	$(CPP) -c $(BALL_DIR)Ball.cpp -o obj/Ball.o
 
 obj/SoccerStars.o: $(SOCCER_STARS_DIR)SoccerStars.hpp $(SOCCER_STARS_DIR)SoccerStars.cpp
 	$(CPP) -c $(SOCCER_STARS_DIR)SoccerStars.cpp -o obj/SoccerStars.o

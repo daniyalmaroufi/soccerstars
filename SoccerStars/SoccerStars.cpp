@@ -2,11 +2,6 @@
 
 SoccerStars::SoccerStars() {}
 
-void SoccerStars::run() {
-    initialize_window();
-    run_the_game();
-}
-
 void SoccerStars::get_rounds_number() {
     cout << "Enter the Number of rounds:";
     cin >> rounds_number;
@@ -32,8 +27,14 @@ void SoccerStars::read_initial_players_position() {
     fin.close();
 }
 
-void SoccerStars::initialize_window() {
+void SoccerStars::run() {
+    initialize_game();
+    run_the_game();
+}
+
+void SoccerStars::initialize_game() {
     win = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
+    ball = new Ball(Point(BALL_INITIAL_X, BALL_INITIAL_Y));
 }
 
 void SoccerStars::set_up_background() {
@@ -41,16 +42,26 @@ void SoccerStars::set_up_background() {
     return;
 }
 
-void SoccerStars::release_all_alloc_memory() { delete win; }
+void SoccerStars::release_all_alloc_memory() {
+    delete win;
+    delete ball;
+    release_players(blue_players);
+    release_players(red_players);
+}
+
+void SoccerStars::release_players(vector<Player*> players) {
+    for (auto player : players) delete player;
+}
 
 void SoccerStars::draw() {
     win->clear();
     set_up_background();
+    ball->draw(win);
     draw_players();
     win->update_screen();
 }
 
-void SoccerStars::draw_players(){
+void SoccerStars::draw_players() {
     for (auto player : blue_players) player->draw(win);
     for (auto player : red_players) player->draw(win);
 }
@@ -70,5 +81,4 @@ void SoccerStars::run_the_game() {
     }
     release_all_alloc_memory();
     SDL_Quit();
-
 }
