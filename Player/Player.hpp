@@ -3,10 +3,11 @@
 
 #include <string>
 
+#include "../Body/Body.hpp"
 #include "../RSDL/rsdl.hpp"
 #include "../main/define.hpp"
 
-class Player {
+class Player : public Body {
    public:
     Player(Point position_, std::string image_dir);
     Player(){};
@@ -15,7 +16,6 @@ class Player {
     Rectangle get_box();
 
    private:
-    Point position;
     std::string player_image;
 };
 
