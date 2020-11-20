@@ -30,6 +30,8 @@ class SoccerStars {
     void draw();
     void draw_players();
     void handle_events();
+    bool game_is_playing();
+    void quit_game();
 
    private:
     Window* win;
@@ -38,8 +40,10 @@ class SoccerStars {
     std::vector<Player*> red_players;
     int red_player_score;
     Ball* ball;
+    int passed_rounds;
     int rounds_number;
     int goals_number;
+    bool quit;
 };
 
 #endif

@@ -3,6 +3,8 @@
 SoccerStars::SoccerStars() {
     blue_player_score = 0;
     red_player_score = 0;
+    passed_rounds = 0;
+    quit = false;
 }
 
 void SoccerStars::get_rounds_number() {
@@ -87,22 +89,33 @@ void SoccerStars::draw_players() {
 }
 
 void SoccerStars::handle_events() {
-    bool quit = false;
     SDL_Event event;
-    while (!quit) {
-        SDL_WaitEvent(&event);
-        switch (event.type) {
-            case SDL_QUIT:
-                quit = true;
-                break;
-        }
-        delay(GAME_DELAY);
+
+    SDL_WaitEvent(&event);
+    switch (event.type) {
+        case SDL_QUIT:
+            quit = true;
+            break;
     }
-    release_all_alloc_memory();
-    SDL_Quit();
+
+    if (quit) quit_game();
 }
 
 void SoccerStars::run_the_game() {
     draw();
-    handle_events();
+    while (game_is_playing()) {
+        handle_events();
+        if (quit) return;
+        delay(GAME_DELAY);
+    }
+}
+
+bool SoccerStars::game_is_playing() {
+    if (passed_rounds == rounds_number) return false;
+    return true;
+}
+
+void SoccerStars::quit_game() {
+    release_all_alloc_memory();
+    SDL_Quit();
 }
