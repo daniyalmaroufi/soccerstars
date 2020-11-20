@@ -13,6 +13,7 @@ class Player : public Body {
     Player(){};
     void draw(Window *win);
     void update(Window *win);
+    bool is_in_pos(Point pos);
 
    private:
     std::string player_image;

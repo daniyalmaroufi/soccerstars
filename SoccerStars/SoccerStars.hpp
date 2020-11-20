@@ -32,6 +32,9 @@ class SoccerStars {
     void handle_events();
     bool game_is_playing();
     void quit_game();
+    Player* select_player(Point mouse_click_pos);
+    Player* find_player_by_pos(vector<Player*> players, Point pos);
+    void toggle_turn();
 
    private:
     Window* win;
@@ -44,6 +47,8 @@ class SoccerStars {
     int rounds_number;
     int goals_number;
     bool quit;
+    int turn;
+    Player* selected_player;
 };
 
 #endif

@@ -20,5 +20,7 @@
 #define FONT_SIZE 25
 #define BLUE_SCORES_POS 160
 #define RED_SCORES_POS 560
+#define BLUE_TURN 0
+#define RED_TURN 1
 
 #endif

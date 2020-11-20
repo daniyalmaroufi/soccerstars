@@ -5,6 +5,8 @@ SoccerStars::SoccerStars() {
     red_player_score = 0;
     passed_rounds = 0;
     quit = false;
+    turn = BLUE_TURN;
+    selected_player = NULL;
 }
 
 void SoccerStars::get_rounds_number() {
@@ -34,6 +36,7 @@ void SoccerStars::read_initial_players_position() {
 
 void SoccerStars::run() {
     initialize_game();
+    // draw();
     run_the_game();
 }
 
@@ -88,12 +91,44 @@ void SoccerStars::draw_players() {
     for (auto player : red_players) player->draw(win);
 }
 
-void SoccerStars::handle_events() {
-    SDL_Event event;
+Player* SoccerStars::find_player_by_pos(vector<Player*> players, Point pos) {
+    for (auto player : players)
+        if (player->is_in_pos(pos)) {
+            return player;
+        }
+    return NULL;
+}
 
-    SDL_WaitEvent(&event);
-    switch (event.type) {
-        case SDL_QUIT:
+Player* SoccerStars::select_player(Point mouse_click_pos) {
+    if (turn == BLUE_TURN) {
+        return find_player_by_pos(blue_players, mouse_click_pos);
+    }
+    if (turn == RED_TURN) {
+        return find_player_by_pos(red_players, mouse_click_pos);
+    }
+}
+
+void SoccerStars::toggle_turn() {
+    if (turn == BLUE_TURN)
+        turn = RED_TURN;
+    else
+        turn = BLUE_TURN;
+}
+
+void SoccerStars::handle_events() {
+    Event event = win->poll_for_event();
+    switch (event.get_type()) {
+        case Event::LCLICK:
+            selected_player = select_player(event.get_mouse_position());
+            break;
+        case Event::LRELEASE:
+            if (selected_player) {
+                selected_player->move_to_pos(event.get_mouse_position());
+                toggle_turn();
+            }
+            selected_player = NULL;
+            break;
+        case Event::QUIT:
             quit = true;
             break;
     }
@@ -102,8 +137,8 @@ void SoccerStars::handle_events() {
 }
 
 void SoccerStars::run_the_game() {
-    draw();
     while (game_is_playing()) {
+        draw();
         handle_events();
         if (quit) return;
         delay(GAME_DELAY);
