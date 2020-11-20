@@ -1,6 +1,9 @@
 #include "SoccerStars.hpp"
 
-SoccerStars::SoccerStars() {}
+SoccerStars::SoccerStars() {
+    blue_player_score = 0;
+    red_player_score = 0;
+}
 
 void SoccerStars::get_rounds_number() {
     cout << "Enter the Number of rounds:";
@@ -38,8 +41,21 @@ void SoccerStars::initialize_game() {
 }
 
 void SoccerStars::set_up_background() {
-    win->draw_img(BACKGROUND_PATH);
+    win->draw_img(BACKGROUND_PATH, get_field_box());
     return;
+}
+
+Rectangle SoccerStars::get_field_box() {
+    Point top_left(0, 0);
+    Point bottom_right(GAME_WIDTH, FIELD_HEIGHT);
+    return Rectangle(top_left, bottom_right);
+}
+
+void SoccerStars::show_scores() {
+    win->show_text("Score: " + to_string(blue_player_score),
+                   Point(170, FIELD_HEIGHT + 5), WHITE, GAME_FONT, 25);
+    win->show_text("Score: " + to_string(red_player_score),
+                   Point(570, FIELD_HEIGHT + 5), WHITE, GAME_FONT, 25);
 }
 
 void SoccerStars::release_all_alloc_memory() {
@@ -58,6 +74,7 @@ void SoccerStars::draw() {
     set_up_background();
     ball->draw(win);
     draw_players();
+    show_scores();
     win->update_screen();
 }
 

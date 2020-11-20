@@ -23,6 +23,8 @@ class SoccerStars {
     void read_initial_players_position();
     void initialize_game();
     void set_up_background();
+    Rectangle get_field_box();
+    void show_scores();
     void release_all_alloc_memory();
     void release_players(vector<Player*> players);
     void draw();
@@ -31,7 +33,9 @@ class SoccerStars {
    private:
     Window* win;
     std::vector<Player*> blue_players;
+    int blue_player_score;
     std::vector<Player*> red_players;
+    int red_player_score;
     Ball* ball;
     int rounds_number;
     int goals_number;
