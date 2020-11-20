@@ -52,7 +52,8 @@ Rectangle SoccerStars::get_field_box() {
 }
 
 void SoccerStars::show_scores() {
-    win->show_text("Score: " + to_string(blue_player_score) + "/" + to_string(goals_number),
+    win->show_text("Score: " + to_string(blue_player_score) + "/" +
+                       to_string(goals_number),
                    Point(BLUE_SCORES_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT,
                    FONT_SIZE);
     win->show_text(
@@ -85,10 +86,9 @@ void SoccerStars::draw_players() {
     for (auto player : red_players) player->draw(win);
 }
 
-void SoccerStars::run_the_game() {
+void SoccerStars::handle_events() {
     bool quit = false;
     SDL_Event event;
-    draw();
     while (!quit) {
         SDL_WaitEvent(&event);
         switch (event.type) {
@@ -100,4 +100,9 @@ void SoccerStars::run_the_game() {
     }
     release_all_alloc_memory();
     SDL_Quit();
+}
+
+void SoccerStars::run_the_game() {
+    draw();
+    handle_events();
 }

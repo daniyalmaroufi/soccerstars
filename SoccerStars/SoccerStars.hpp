@@ -1,15 +1,15 @@
 #ifndef __FIELDRUNNERS__
 #define __FIELDRUNNERS__
+#include <ctime>
+#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <fstream>
-#include <ctime>
 
-#include "../main/define.hpp"
-#include "../Player/Player.hpp"
 #include "../Ball/Ball.hpp"
+#include "../Player/Player.hpp"
+#include "../main/define.hpp"
 
 using namespace std;
 
@@ -29,6 +29,7 @@ class SoccerStars {
     void release_players(vector<Player*> players);
     void draw();
     void draw_players();
+    void handle_events();
 
    private:
     Window* win;
