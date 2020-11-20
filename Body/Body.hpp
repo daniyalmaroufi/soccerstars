@@ -6,11 +6,13 @@
 
 class Body {
    public:
-    Body(Point position_);
+    Body(Point position_, int radius_);
     Body(){};
+    Rectangle get_box();
 
    protected:
     Point position;
+    int radius;
 };
 
 #endif

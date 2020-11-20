@@ -11,7 +11,6 @@ class Ball : public Body {
     Ball(){};
     void draw(Window *win);
     void update(Window *win);
-    Rectangle get_box();
 
    private:
 };

@@ -13,7 +13,6 @@ class Player : public Body {
     Player(){};
     void draw(Window *win);
     void update(Window *win);
-    Rectangle get_box();
 
    private:
     std::string player_image;
