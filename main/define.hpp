@@ -17,5 +17,8 @@
 #define BALL_INITIAL_X 400
 #define BALL_INITIAL_Y 240
 #define GAME_FONT "Assets/game_font.ttf"
+#define FONT_SIZE 25
+#define BLUE_SCORES_POS 160
+#define RED_SCORES_POS 560
 
 #endif

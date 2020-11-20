@@ -52,10 +52,12 @@ Rectangle SoccerStars::get_field_box() {
 }
 
 void SoccerStars::show_scores() {
-    win->show_text("Score: " + to_string(blue_player_score),
-                   Point(170, FIELD_HEIGHT + 5), WHITE, GAME_FONT, 25);
-    win->show_text("Score: " + to_string(red_player_score),
-                   Point(570, FIELD_HEIGHT + 5), WHITE, GAME_FONT, 25);
+    win->show_text("Score: " + to_string(blue_player_score) + "/" + to_string(goals_number),
+                   Point(BLUE_SCORES_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT,
+                   FONT_SIZE);
+    win->show_text(
+        "Score: " + to_string(red_player_score) + "/" + to_string(goals_number),
+        Point(RED_SCORES_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT, FONT_SIZE);
 }
 
 void SoccerStars::release_all_alloc_memory() {
