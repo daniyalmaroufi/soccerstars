@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 #include "../Ball/Ball.hpp"
 #include "../Player/Player.hpp"
@@ -39,6 +40,8 @@ class SoccerStars {
     Player* select_player(Point mouse_click_pos);
     Player* find_player_by_pos(vector<Player*> players, Point pos);
     void toggle_turn();
+    void throw_selected_player(Point mouse_release_pos);
+    velocity calculate_initial_velocity(Point from_pos, Point to_pos);
 
    private:
     Window* win;

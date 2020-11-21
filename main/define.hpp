@@ -24,5 +24,12 @@
 #define RED_TURN 1
 #define GAME_FPS 25
 #define FRAME_DURATION 40
+#define THROW_RADIUS 60
+#define MAX_INITIAL_SPEED 500
+
+struct velocity{
+    double x;
+    double y;
+};
 
 #endif

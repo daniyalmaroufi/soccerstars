@@ -10,12 +10,12 @@ class Body {
     Body(){};
     Rectangle get_box();
     void move_to_pos(Point new_pos);
+    Point get_position();
 
    protected:
     Point position;
     int radius;
-    double vx;
-    double vy;
+    velocity v;
 };
 
 #endif

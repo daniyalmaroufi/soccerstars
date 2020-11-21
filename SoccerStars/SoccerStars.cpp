@@ -124,7 +124,8 @@ void SoccerStars::handle_events() {
             break;
         case Event::LRELEASE:
             if (selected_player) {
-                selected_player->move_to_pos(event.get_mouse_position());
+                // selected_player->move_to_pos(event.get_mouse_position());
+                throw_selected_player(event.get_mouse_position());
                 toggle_turn();
             }
             selected_player = NULL;
@@ -135,6 +136,27 @@ void SoccerStars::handle_events() {
     }
 
     if (quit) quit_game();
+}
+
+void SoccerStars::throw_selected_player(Point mouse_release_pos) {
+    velocity v = calculate_initial_velocity(selected_player->get_position(),
+                                            mouse_release_pos);
+}
+
+velocity SoccerStars::calculate_initial_velocity(Point from_pos, Point to_pos) {
+    Point throw_vector;
+    throw_vector.x = from_pos.x - to_pos.x;
+    throw_vector.y = from_pos.y - to_pos.y;
+    double distance = sqrt(pow(throw_vector.x, 2) + pow(throw_vector.y, 2));
+    velocity v;
+    if (distance < THROW_RADIUS) {
+        v.x = -throw_vector.x * MAX_INITIAL_SPEED / THROW_RADIUS;
+        v.y = -throw_vector.y * MAX_INITIAL_SPEED / THROW_RADIUS;
+    } else {
+        v.x = -throw_vector.x * MAX_INITIAL_SPEED / distance;
+        v.y = -throw_vector.y * MAX_INITIAL_SPEED / distance;
+    }
+    return v;
 }
 
 void SoccerStars::run_the_game() {

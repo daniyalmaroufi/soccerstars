@@ -13,3 +13,5 @@ Rectangle Body::get_box() {
 }
 
 void Body::move_to_pos(Point new_pos) { position = new_pos; }
+
+Point Body::get_position() { return position; }
