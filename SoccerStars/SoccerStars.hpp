@@ -1,12 +1,12 @@
 #ifndef __FIELDRUNNERS__
 #define __FIELDRUNNERS__
+#include <cmath>
 #include <ctime>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <cmath>
 
 #include "../Ball/Ball.hpp"
 #include "../Player/Player.hpp"
@@ -41,7 +41,9 @@ class SoccerStars {
     Player* find_player_by_pos(vector<Player*> players, Point pos);
     void toggle_turn();
     void throw_selected_player(Point mouse_release_pos);
-    velocity calculate_initial_velocity(Point from_pos, Point to_pos);
+    velocity calculate_initial_velocity(position from_pos, Point to_pos);
+    void move_all_bodies_one_frame();
+    bool is_all_bodies_moving();
 
    private:
     Window* win;

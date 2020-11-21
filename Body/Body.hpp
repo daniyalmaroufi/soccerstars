@@ -6,14 +6,17 @@
 
 class Body {
    public:
-    Body(Point position_, int radius_);
+    Body(position position_, int radius_);
     Body(){};
     Rectangle get_box();
-    void move_to_pos(Point new_pos);
-    Point get_position();
+    void move_to_pos(position new_pos);
+    position get_position();
+    void set_velocity(velocity v_);
+    void move_one_frame();
+    bool is_moving();
 
    protected:
-    Point position;
+    position pos;
     int radius;
     velocity v;
 };

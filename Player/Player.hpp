@@ -9,7 +9,7 @@
 
 class Player : public Body {
    public:
-    Player(Point position_, std::string image_dir);
+    Player(position position_, std::string image_dir);
     Player(){};
     void draw(Window *win);
     void update(Window *win);

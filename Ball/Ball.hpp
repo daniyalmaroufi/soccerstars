@@ -7,7 +7,7 @@
 
 class Ball : public Body {
    public:
-    Ball(Point position_);
+    Ball(position position_);
     Ball(){};
     void draw(Window *win);
     void update(Window *win);
