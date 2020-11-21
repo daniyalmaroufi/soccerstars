@@ -1,9 +1,10 @@
 #include "SoccerStars.hpp"
 
 SoccerStars::SoccerStars() {
-    blue_player_score = 0;
-    red_player_score = 0;
-    passed_rounds = 0;
+    blue_goals = 0;
+    red_goals = 0;
+    blue_rounds = 0;
+    red_rounds = 0;
     quit = false;
     turn = BLUE_TURN;
     selected_player = NULL;
@@ -12,6 +13,7 @@ SoccerStars::SoccerStars() {
 void SoccerStars::get_rounds_number() {
     cout << "Enter the Number of rounds:";
     cin >> rounds_number;
+    rounds_number = (rounds_number + 1) / 2;
 }
 void SoccerStars::get_goals_number() {
     cout << "Enter the Number of goals:";
@@ -57,12 +59,11 @@ Rectangle SoccerStars::get_field_box() {
 }
 
 void SoccerStars::show_scores() {
-    win->show_text("Score: " + to_string(blue_player_score) + "/" +
-                       to_string(goals_number),
-                   Point(BLUE_SCORES_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT,
-                   FONT_SIZE);
     win->show_text(
-        "Score: " + to_string(red_player_score) + "/" + to_string(goals_number),
+        "Goals: " + to_string(blue_goals) + "/" + to_string(goals_number),
+        Point(BLUE_SCORES_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT, FONT_SIZE);
+    win->show_text(
+        "Goals: " + to_string(red_goals) + "/" + to_string(goals_number),
         Point(RED_SCORES_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT, FONT_SIZE);
 }
 
@@ -137,17 +138,46 @@ void SoccerStars::handle_events() {
 }
 
 void SoccerStars::run_the_game() {
-    while (game_is_playing()) {
-        draw();
-        handle_events();
-        if (quit) return;
-        delay(GAME_DELAY);
+    while (!any_team_won()) {
+        while (!any_team_won_in_round()) {
+            play_round();
+            if (quit) return;
+            delay(GAME_DELAY);
+        }
     }
 }
 
-bool SoccerStars::game_is_playing() {
-    if (passed_rounds == rounds_number) return false;
-    return true;
+void SoccerStars::play_round() {
+    draw();
+    handle_events();
+}
+
+bool SoccerStars::any_team_won() {
+    if (blue_rounds == rounds_number) return true;
+    if (red_rounds == rounds_number) return true;
+    return false;
+}
+
+bool SoccerStars::any_team_won_in_round() {
+    return check_blue_rounds() || check_red_rounds();
+}
+
+bool SoccerStars::check_blue_rounds() {
+    if (blue_goals == goals_number) {
+        blue_rounds++;
+        blue_goals = 0;
+        return true;
+    } else
+        return false;
+}
+
+bool SoccerStars::check_red_rounds() {
+    if (red_goals == goals_number) {
+        red_rounds++;
+        red_goals = 0;
+        return true;
+    } else
+        return false;
 }
 
 void SoccerStars::quit_game() {

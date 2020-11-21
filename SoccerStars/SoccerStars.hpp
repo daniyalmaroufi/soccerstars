@@ -30,7 +30,11 @@ class SoccerStars {
     void draw();
     void draw_players();
     void handle_events();
-    bool game_is_playing();
+    bool any_team_won();
+    bool any_team_won_in_round();
+    bool check_blue_rounds();
+    bool check_red_rounds();
+    void play_round();
     void quit_game();
     Player* select_player(Point mouse_click_pos);
     Player* find_player_by_pos(vector<Player*> players, Point pos);
@@ -38,12 +42,13 @@ class SoccerStars {
 
    private:
     Window* win;
-    std::vector<Player*> blue_players;
-    int blue_player_score;
-    std::vector<Player*> red_players;
-    int red_player_score;
     Ball* ball;
-    int passed_rounds;
+    std::vector<Player*> blue_players;
+    int blue_goals;
+    int blue_rounds;
+    std::vector<Player*> red_players;
+    int red_goals;
+    int red_rounds;
     int rounds_number;
     int goals_number;
     bool quit;
