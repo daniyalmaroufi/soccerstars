@@ -14,6 +14,8 @@ class Body {
    protected:
     Point position;
     int radius;
+    double vx;
+    double vy;
 };
 
 #endif

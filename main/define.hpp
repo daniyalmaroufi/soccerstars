@@ -22,5 +22,7 @@
 #define RED_SCORES_POS 560
 #define BLUE_TURN 0
 #define RED_TURN 1
+#define GAME_FPS 25
+#define FRAME_DURATION 40
 
 #endif
