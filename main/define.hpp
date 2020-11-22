@@ -5,14 +5,14 @@
 #define GAME_WIDTH 800
 #define GAME_HEIGHT 530
 #define FIELD_HEIGHT 480
-#define BACKGROUND_PATH "../Assets/field.jpg"
+#define BACKGROUND_PATH "Assets/field.jpg"
 #define PLAYER_RADIUS 15
 #define PLAYERS_INITIAL_POSITION "./players_initial_position.txt"
 #define NUMBER_OF_TEAM_PLAYERS 5
-#define PLAYER1_PATH "../Assets/Player1.png"
-#define PLAYER2_PATH "../Assets/Player2.png"
+#define PLAYER1_PATH "Assets/Player1.png"
+#define PLAYER2_PATH "Assets/Player2.png"
 #define GAME_DELAY 15
-#define BALL_IMAGE "../Assets/ball.png"
+#define BALL_IMAGE "Assets/ball.png"
 #define BALL_RADIUS 10
 #define BALL_INITIAL_X 400
 #define BALL_INITIAL_Y 240
@@ -25,8 +25,11 @@
 #define GAME_FPS 25
 #define FRAME_DURATION 40
 #define THROW_RADIUS 60
-#define MAX_INITIAL_SPEED 300
+#define MAX_INITIAL_SPEED 400
 #define FRICTION_ACC 20
+#define GATE_TOP 160
+#define GATE_BOTTOM 320
+
 
 struct position{
     double x;

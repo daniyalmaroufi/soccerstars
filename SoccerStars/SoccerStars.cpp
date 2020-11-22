@@ -212,9 +212,7 @@ void SoccerStars::handle_impact_with_edges() {
     if (!is_body_in_the_field(ball)) ball->reflect_with_edges();
 
     for (auto player : blue_players)
-        if (!is_body_in_the_field(player)) {
-            player->reflect_with_edges();
-        }
+        if (!is_body_in_the_field(player)) player->reflect_with_edges();
 
     for (auto player : red_players)
         if (!is_body_in_the_field(player)) player->reflect_with_edges();
