@@ -25,8 +25,8 @@
 #define GAME_FPS 25
 #define FRAME_DURATION 40
 #define THROW_RADIUS 60
-#define MAX_INITIAL_SPEED 50
-#define FRICTION_ACC 30
+#define MAX_INITIAL_SPEED 300
+#define FRICTION_ACC 20
 
 struct position{
     double x;

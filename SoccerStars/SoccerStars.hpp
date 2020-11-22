@@ -35,7 +35,6 @@ class SoccerStars {
     bool any_team_won_in_round();
     bool check_blue_rounds();
     bool check_red_rounds();
-    void play_round();
     void quit_game();
     Player* select_player(Point mouse_click_pos);
     Player* find_player_by_pos(vector<Player*> players, Point pos);
@@ -44,6 +43,7 @@ class SoccerStars {
     velocity calculate_initial_velocity(position from_pos, Point to_pos);
     void move_all_bodies_one_frame();
     bool is_all_bodies_moving();
+    void play_one_step();
 
    private:
     Window* win;

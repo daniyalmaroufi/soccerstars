@@ -12,7 +12,6 @@ class Player : public Body {
     Player(position position_, std::string image_dir);
     Player(){};
     void draw(Window *win);
-    void update(Window *win);
     bool is_in_pos(Point pos);
 
    private:

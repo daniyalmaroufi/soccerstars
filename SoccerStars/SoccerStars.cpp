@@ -152,10 +152,10 @@ void SoccerStars::throw_selected_player(Point mouse_release_pos) {
     velocity v = calculate_initial_velocity(selected_player->get_position(),
                                             mouse_release_pos);
     selected_player->set_velocity(v);
-    move_all_bodies_one_frame();
 }
 
 void SoccerStars::move_all_bodies_one_frame() {
+    cout<<"moving frame"<<endl;
     for (auto player : blue_players) player->move_one_frame();
     for (auto player : red_players) player->move_one_frame();
 }
@@ -178,26 +178,24 @@ velocity SoccerStars::calculate_initial_velocity(position from_pos,
 }
 
 void SoccerStars::run_the_game() {
+    draw();
     while (!any_team_won()) {
         while (!any_team_won_in_round()) {
-            play_round();
+            play_one_step();
             if (quit) return;
             delay(GAME_DELAY);
         }
-        // reset game
     }
     // show winner
     quit_game();
 }
 
-void SoccerStars::play_round() {
-    // ma inja entezar darim vaghti az in tabe miad biroon 3 ta goll zade shode
-    // bashe ta zamani ke toop vaynasade
+void SoccerStars::play_one_step() {
     handle_events();
-    move_all_bodies_one_frame();
-    draw();
-    //     voroudi mouse begir
-    //     bia update(yani zaman begzare va draw kon
+    while (is_all_bodies_moving()) {
+        move_all_bodies_one_frame();
+        draw();
+    }
 }
 
 bool SoccerStars::is_all_bodies_moving() {
