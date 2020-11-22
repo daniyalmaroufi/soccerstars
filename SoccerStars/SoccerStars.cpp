@@ -167,6 +167,9 @@ void SoccerStars::move_all_bodies_one_frame() {
             player->move_one_frame();
         }
     }
+    if (ball->is_moving()) {
+        ball->move_one_frame();
+    }
 }
 
 velocity SoccerStars::calculate_initial_velocity(position from_pos,

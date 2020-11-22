@@ -5,7 +5,7 @@ Body::Body(position position_, int radius_, int mass_) {
     radius = radius_;
     v.x = 0;
     v.y = 0;
-    mass=mass;
+    mass = mass_;
 }
 
 Rectangle Body::get_box() {
