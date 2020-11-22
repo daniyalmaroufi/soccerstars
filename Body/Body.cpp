@@ -44,6 +44,27 @@ void Body::move_one_frame() {
 
 bool Body::is_moving() {
     if (!v.x && !v.y) return false;
-    std::cout << "i'm moving:"<< v.x << "," << v.y << std::endl;
+    std::cout << "i'm moving:" << v.x << "," << v.y << std::endl;
     return true;
+}
+
+int Body::get_radius() { return radius; }
+
+void Body::reflect_with_edges() {
+    if (pos.x < radius) {
+        pos.x = 2 * radius - pos.x;
+        v.x = -v.x;
+    }
+    if (pos.x > GAME_WIDTH - radius) {
+        pos.x = 2 * (GAME_WIDTH - radius) - pos.x;
+        v.x = -v.x;
+    }
+    if (pos.y < radius) {
+        pos.y = 2 * radius - pos.y;
+        v.y = -v.y;
+    }
+    if (pos.y > FIELD_HEIGHT - radius) {
+        pos.x = 2 * (FIELD_HEIGHT - radius) - pos.y;
+        v.y = -v.y;
+    }
 }

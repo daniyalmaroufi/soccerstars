@@ -202,9 +202,30 @@ void SoccerStars::play_one_step() {
     handle_events();
     while (is_all_bodies_moving()) {
         move_all_bodies_one_frame();
+        handle_impact_with_edges();
         draw();
         delay(GAME_DELAY);
     }
+}
+
+void SoccerStars::handle_impact_with_edges() {
+    if (!is_body_in_the_field(ball)) ball->reflect_with_edges();
+
+    for (auto player : blue_players)
+        if (!is_body_in_the_field(player)) {
+            player->reflect_with_edges();
+        }
+
+    for (auto player : red_players)
+        if (!is_body_in_the_field(player)) player->reflect_with_edges();
+}
+
+bool SoccerStars::is_body_in_the_field(Body* body) {
+    position body_pos = body->get_position();
+    return body_pos.x > body->get_radius() &&
+           body_pos.x < GAME_WIDTH - body->get_radius() &&
+           body_pos.y > body->get_radius() &&
+           body_pos.y < FIELD_HEIGHT - body->get_radius();
 }
 
 bool SoccerStars::is_all_bodies_moving() {

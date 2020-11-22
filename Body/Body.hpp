@@ -11,9 +11,11 @@ class Body {
     Rectangle get_box();
     void move_to_pos(position new_pos);
     position get_position();
+    int get_radius();
     void set_velocity(velocity v_);
     void move_one_frame();
     bool is_moving();
+    void reflect_with_edges();
 
    protected:
     position pos;

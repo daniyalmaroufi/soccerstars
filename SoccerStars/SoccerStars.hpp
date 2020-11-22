@@ -44,6 +44,8 @@ class SoccerStars {
     void move_all_bodies_one_frame();
     bool is_all_bodies_moving();
     void play_one_step();
+    void handle_impact_with_edges();
+    bool is_body_in_the_field(Body* body);
 
    private:
     Window* win;
