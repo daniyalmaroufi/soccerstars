@@ -155,9 +155,17 @@ void SoccerStars::throw_selected_player(Point mouse_release_pos) {
 }
 
 void SoccerStars::move_all_bodies_one_frame() {
-    cout<<"moving frame"<<endl;
-    for (auto player : blue_players) player->move_one_frame();
-    for (auto player : red_players) player->move_one_frame();
+    cout << "moving frame" << endl;
+    for (auto player : blue_players) {
+        if (player->is_moving()) {
+            player->move_one_frame();
+        }
+    }
+    for (auto player : red_players) {
+        if (player->is_moving()) {
+            player->move_one_frame();
+        }
+    }
 }
 
 velocity SoccerStars::calculate_initial_velocity(position from_pos,
@@ -195,15 +203,22 @@ void SoccerStars::play_one_step() {
     while (is_all_bodies_moving()) {
         move_all_bodies_one_frame();
         draw();
+        delay(GAME_DELAY);
     }
 }
 
 bool SoccerStars::is_all_bodies_moving() {
-    if (ball->is_moving()) return true;
+    // if (ball->is_moving()) return true;
     for (auto player : blue_players)
-        if (player->is_moving()) return true;
+        if (player->is_moving()) {
+            cout << "blue moving" << endl;
+            return true;
+        }
     for (auto player : red_players)
-        if (player->is_moving()) return true;
+        if (player->is_moving()) {
+            cout << "red moving" << endl;
+            return true;
+        }
     return false;
 }
 
