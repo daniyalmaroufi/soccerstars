@@ -224,6 +224,24 @@ bool SoccerStars::handle_bodies_impact() {
             ball->reflect_by(player);
         }
     }
+
+    for (int i = 0; i < blue_players.size(); i++) {
+        for (int j = i + 1; j < blue_players.size(); j++)
+            if (blue_players[i]->has_impact_with(blue_players[j]))
+                blue_players[i]->reflect_by(blue_players[j]);
+        for (auto player : red_players)
+            if (blue_players[i]->has_impact_with(player))
+                blue_players[i]->reflect_by(player);
+    }
+
+    for (int i = 0; i < red_players.size(); i++) {
+        for (int j = i + 1; j < red_players.size(); j++)
+            if (red_players[i]->has_impact_with(red_players[j]))
+                blue_players[i]->reflect_by(blue_players[j]);
+        for (auto player : blue_players)
+            if (red_players[i]->has_impact_with(player))
+                red_players[i]->reflect_by(player);
+    }
 }
 
 void SoccerStars::handle_impact_with_edges() {
