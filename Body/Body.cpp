@@ -21,12 +21,13 @@ position Body::get_position() { return pos; }
 void Body::set_velocity(velocity v_) { v = v_; }
 
 void Body::move_one_frame() {
-    double velocity_magnitude = sqrt(pow(v.x, 2) + pow(v.x, 2));
-    if (velocity_magnitude > 0) {
-        std::cout << "decceleating" << std::endl;
-        double new_magnitude = velocity_magnitude - FRICTION_ACC;
-        v.x = (new_magnitude / velocity_magnitude) * v.x;
-        v.y = (new_magnitude / velocity_magnitude) * v.y;
+    double speed = sqrt(pow(v.x, 2) + pow(v.y, 2));
+    std::cout << "vel mag: " << speed << std::endl;
+    if (speed > 0) {
+        std::cout << "decceleating" << speed << std::endl;
+        double new_speed = speed - FRICTION_ACC;
+        v.x = (new_speed / speed) * v.x;
+        v.y = (new_speed / speed) * v.y;
     }
 
     pos.x = pos.x - v.x * FRAME_DURATION / 1000;
@@ -64,7 +65,7 @@ void Body::reflect_with_edges() {
         v.y = -v.y;
     }
     if (pos.y > FIELD_HEIGHT - radius) {
-        pos.x = 2 * (FIELD_HEIGHT - radius) - pos.y;
+        pos.y = 2 * (FIELD_HEIGHT - radius) - pos.y;
         v.y = -v.y;
     }
 }
