@@ -46,7 +46,7 @@ class SoccerStars {
     void play_one_step();
     void handle_impact_with_edges();
     bool is_body_in_the_field(Body* body);
-    bool does_bodies_impact(Body* first, Body* second);
+    bool handle_bodies_impact();
 
    private:
     Window* win;

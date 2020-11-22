@@ -30,6 +30,8 @@
 #define FRICTION_ACC 20
 #define GATE_TOP 160
 #define GATE_BOTTOM 320
+#define BALL_MASS 1
+#define PLAYER_MASS 2
 
 
 struct position{

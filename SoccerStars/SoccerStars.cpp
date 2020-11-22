@@ -204,8 +204,22 @@ void SoccerStars::play_one_step() {
     while (is_all_bodies_moving()) {
         move_all_bodies_one_frame();
         handle_impact_with_edges();
+        handle_bodies_impact();
         draw();
         delay(GAME_DELAY);
+    }
+}
+
+bool SoccerStars::handle_bodies_impact() {
+    for (auto player : blue_players) {
+        if (ball->has_impact_with(player)) {
+            ball->reflect_by(player);
+        }
+    }
+    for (auto player : red_players) {
+        if (ball->has_impact_with(player)) {
+            ball->reflect_by(player);
+        }
     }
 }
 

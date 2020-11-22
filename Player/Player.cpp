@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
 Player::Player(position position_, std::string image_dir)
-    : Body(position_, PLAYER_RADIUS) {
+    : Body(position_, PLAYER_RADIUS, PLAYER_MASS) {
     player_image = image_dir;
 }
 
