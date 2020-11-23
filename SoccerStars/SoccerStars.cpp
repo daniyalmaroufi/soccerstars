@@ -50,7 +50,7 @@ void SoccerStars::read_initial_players_position() {
         position pos;
         pos.x = x;
         pos.y = y;
-        blue_inital_pos.push_back(pos);
+        red_inital_pos.push_back(pos);
     }
 
     fin.close();
@@ -58,7 +58,6 @@ void SoccerStars::read_initial_players_position() {
 
 void SoccerStars::run() {
     initialize_game();
-    // draw();
     run_the_game();
 }
 
@@ -238,6 +237,7 @@ void SoccerStars::check_goal() {
             red_goals += 1;
             turn = BLUE_TEAM;
         }
+        delay(GAME_DELAY * GAME_DELAY);
         reset_game();
     }
 }
@@ -247,6 +247,8 @@ void SoccerStars::reset_game() {
     pos.x = BALL_INITIAL_X;
     pos.y = BALL_INITIAL_Y;
     ball->move_to_pos(pos);
+    set_players_inital_pos();
+    draw();
 }
 
 bool SoccerStars::handle_bodies_impact() {

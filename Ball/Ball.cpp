@@ -45,8 +45,8 @@ bool Ball::is_goal() {
 int Ball::who_scored() {
     if (is_goal())
         if (pos.x < 0)
-            return BLUE_TEAM;
-        else
             return RED_TEAM;
+        else
+            return BLUE_TEAM;
     return -1;
 }
