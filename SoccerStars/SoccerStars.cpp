@@ -87,13 +87,13 @@ void SoccerStars::show_scores() {
         "Goals: " + to_string(blue_goals) + "/" + to_string(goals_number),
         Point(BLUE_GOALS_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT, FONT_SIZE);
     win->show_text(
-        "Rounds: " + to_string(blue_rounds) + "/" + to_string(goals_number),
+        "Rounds: " + to_string(blue_rounds) + "/" + to_string(rounds_number),
         Point(BLUE_ROUNDS_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT, FONT_SIZE);
     win->show_text(
         "Goals: " + to_string(red_goals) + "/" + to_string(goals_number),
         Point(RED_GOALS_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT, FONT_SIZE);
     win->show_text(
-        "Rounds: " + to_string(red_rounds) + "/" + to_string(goals_number),
+        "Rounds: " + to_string(red_rounds) + "/" + to_string(rounds_number),
         Point(RED_ROUNDS_POS, FIELD_HEIGHT + 5), WHITE, GAME_FONT, FONT_SIZE);
 }
 
