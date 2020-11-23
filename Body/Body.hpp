@@ -8,9 +8,10 @@
 
 class Body {
    public:
-    Body(position position_, int radius_, int mass);
+    Body(position position_, int radius_, int mass_, std::string image_);
     Body(){};
     Rectangle get_box();
+    void draw(Window* win);
     void move_to_pos(position new_pos);
     position get_position();
     int get_radius();
@@ -25,6 +26,7 @@ class Body {
     int radius;
     velocity v;
     int mass;
+    std::string image;
 };
 
 #endif

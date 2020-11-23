@@ -1,11 +1,12 @@
 #include "Body.hpp"
 
-Body::Body(position position_, int radius_, int mass_) {
+Body::Body(position position_, int radius_, int mass_, std::string image_) {
     pos = position_;
     radius = radius_;
     v.x = 0;
     v.y = 0;
     mass = mass_;
+    image = image_;
 }
 
 Rectangle Body::get_box() {
@@ -14,6 +15,8 @@ Rectangle Body::get_box() {
     Rectangle box(top_left, bottom_right);
     return box;
 }
+
+void Body::draw(Window* win) { win->draw_img(image, get_box()); }
 
 void Body::move_to_pos(position new_pos) { pos = new_pos; }
 
