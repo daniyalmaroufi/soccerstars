@@ -14,6 +14,7 @@
 #define GAME_DELAY 15
 #define BALL_IMAGE "Assets/ball.png"
 #define MUSIC_PATH "Assets/music.mp3"
+#define CIRCLE_PATH "Assets/circle.png"
 #define BALL_RADIUS 10
 #define BALL_INITIAL_X 400
 #define BALL_INITIAL_Y 240

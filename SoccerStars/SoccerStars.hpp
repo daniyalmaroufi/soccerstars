@@ -1,5 +1,5 @@
-#ifndef __FIELDRUNNERS__
-#define __FIELDRUNNERS__
+#ifndef __SOCCERSTARS__
+#define __SOCCERSTARS__
 #include <cmath>
 #include <ctime>
 #include <fstream>
@@ -32,6 +32,7 @@ class SoccerStars {
     void release_players(vector<Player*> players);
     void draw();
     void draw_players();
+    void draw_throw_vector(Point mouse_pos);
     void handle_events();
     bool any_team_won();
     bool any_team_won_in_round();

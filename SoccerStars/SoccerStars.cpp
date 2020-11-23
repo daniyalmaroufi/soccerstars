@@ -123,6 +123,29 @@ void SoccerStars::draw_players() {
     for (auto player : red_players) player->draw(win);
 }
 
+void SoccerStars::draw_throw_vector(Point mouse_pos) {
+    if (selected_player) {
+        position pos = selected_player->get_position();
+        double circle_radius =
+            sqrt(pow(pos.x - mouse_pos.x, 2) + pow(pos.y - mouse_pos.y, 2));
+        if (circle_radius > THROW_RADIUS) circle_radius = THROW_RADIUS;
+        Point top_left(pos.x - circle_radius, pos.y - circle_radius);
+        Point bottom_right(pos.x + circle_radius, pos.y + circle_radius);
+        Rectangle box(top_left, bottom_right);
+        win->clear();
+        draw();
+        win->draw_img(CIRCLE_PATH, box);
+        Point player_center;
+        player_center.x = (int)pos.x;
+        player_center.y = (int)pos.y;
+        Point head;
+        head.x = (int)(2 * player_center.x - mouse_pos.x);
+        head.y = (int)(2 * player_center.y - mouse_pos.y);
+        win->draw_line(Point(pos.x, pos.y), head, YELLOW);
+        win->update_screen();
+    }
+}
+
 Player* SoccerStars::find_player_by_pos(vector<Player*> players, Point pos) {
     for (auto player : players)
         if (player->is_in_pos(pos)) {
@@ -160,6 +183,11 @@ void SoccerStars::handle_events() {
                 toggle_turn();
             }
             selected_player = NULL;
+            break;
+        case Event::MMOTION:
+            if (selected_player) {
+                draw_throw_vector(event.get_mouse_position());
+            }
             break;
         case Event::QUIT:
             quit = true;
@@ -215,8 +243,8 @@ void SoccerStars::run_the_game() {
             play_one_step();
             check_goal();
             if (quit) return;
-            delay(GAME_DELAY);
         } while (any_team_won_in_round());
+        delay(GAME_DELAY);
     }
     show_winner();
     quit_game();
@@ -240,12 +268,11 @@ void SoccerStars::show_winner() {
 
 void SoccerStars::play_one_step() {
     handle_events();
+
     while (is_all_bodies_moving()) {
         move_all_bodies_one_frame();
-        // while (has_impact()) {
         handle_impact_with_edges();
         handle_bodies_impact();
-        // }
         draw();
         delay(GAME_DELAY);
     }

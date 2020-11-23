@@ -9,7 +9,6 @@ void Ball::reflect_with_edges() {
         if (pos.y > GATE_TOP && pos.y < GATE_BOTTOM) {
             v.x = 0;
             v.y = 0;
-            std::cout << "goallllllllllllllllll" << std::endl;
             pos.x = -radius;
         } else {
             pos.x = 2 * radius - pos.x;
@@ -20,7 +19,6 @@ void Ball::reflect_with_edges() {
         if (pos.y > GATE_TOP && pos.y < GATE_BOTTOM) {
             v.x = 0;
             v.y = 0;
-            std::cout << "goallllllllllllllllll" << std::endl;
             pos.x = GAME_WIDTH + radius;
         } else {
             pos.x = 2 * (GAME_WIDTH - radius) - pos.x;

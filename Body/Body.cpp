@@ -38,9 +38,6 @@ void Body::move_one_frame() {
     if (v.y <= 20 && v.y >= -20) {
         v.y = 0;
     }
-
-    std::cout << "vel:" << v.x << "," << v.y << std::endl;
-    std::cout << "pos:" << pos.x << "," << pos.y << std::endl;
 }
 
 bool Body::is_moving() {
@@ -54,7 +51,6 @@ bool Body::has_impact_with(Body* body) {
     if (sqrt(pow(pos.x - body->pos.x, 2) + pow(pos.y - body->pos.y, 2)) >
         radius + body->radius)
         return false;
-    std::cout << "impact!!!!" << std::endl;
     return true;
 }
 
