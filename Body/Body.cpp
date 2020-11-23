@@ -23,7 +23,6 @@ void Body::set_velocity(velocity v_) { v = v_; }
 
 void Body::move_one_frame() {
     double speed = sqrt(pow(v.x, 2) + pow(v.y, 2));
-    std::cout << "vel mag: " << speed << std::endl;
     if (speed > 0) {
         double new_speed = speed - FRICTION_ACC;
         v.x = (new_speed / speed) * v.x;
@@ -39,11 +38,13 @@ void Body::move_one_frame() {
     if (v.y <= 20 && v.y >= -20) {
         v.y = 0;
     }
+
+    std::cout << "vel:" << v.x << "," << v.y << std::endl;
+    std::cout << "pos:" << pos.x << "," << pos.y << std::endl;
 }
 
 bool Body::is_moving() {
     if (!v.x && !v.y) return false;
-    std::cout << ":" << v.x << "," << v.y << std::endl;
     return true;
 }
 
@@ -53,11 +54,25 @@ bool Body::has_impact_with(Body* body) {
     if (sqrt(pow(pos.x - body->pos.x, 2) + pow(pos.y - body->pos.y, 2)) >
         radius + body->radius)
         return false;
+    std::cout << "impact!!!!" << std::endl;
     return true;
 }
 
 void Body::reflect_by(Body* body) {
     if (has_impact_with(body)) {
+        if (body->v.x == 0 && body->v.y == 0 && v.x == 0 && v.y == 0) {
+            while (has_impact_with(body)) {
+                body->pos.x = body->pos.x - 5;
+                body->pos.y = body->pos.y - 5;
+                pos.x = pos.x - 5;
+                pos.y = pos.y - 5;
+            }
+        }
+        body->pos.x = body->pos.x + body->v.x * FRAME_DURATION / 1000;
+        body->pos.y = body->pos.y + body->v.y * FRAME_DURATION / 1000;
+        pos.x = pos.x + v.x * FRAME_DURATION / 1000;
+        pos.y = pos.y + v.y * FRAME_DURATION / 1000;
+
         body->v.x =
             body->v.x -
             2 * mass / (mass + body->mass) *

@@ -49,6 +49,7 @@ class SoccerStars {
     void handle_impact_with_edges();
     bool is_body_in_the_field(Body* body);
     bool handle_bodies_impact();
+    bool has_impact();
     void check_goal();
     void reset_game();
 

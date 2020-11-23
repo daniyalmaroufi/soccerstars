@@ -177,6 +177,7 @@ void SoccerStars::throw_selected_player(Point mouse_release_pos) {
 
 void SoccerStars::move_all_bodies_one_frame() {
     cout << "moving frame" << endl;
+    // cin.get();
     for (auto player : blue_players) {
         if (player->is_moving()) {
             player->move_one_frame();
@@ -226,12 +227,15 @@ void SoccerStars::play_one_step() {
     handle_events();
     while (is_all_bodies_moving()) {
         move_all_bodies_one_frame();
-        handle_impact_with_edges();
-        handle_bodies_impact();
+        while (has_impact()) {
+            handle_impact_with_edges();
+            handle_bodies_impact();
+        }
         draw();
         delay(GAME_DELAY);
     }
     check_goal();
+    any_team_won_in_round();
 }
 
 void SoccerStars::check_goal() {
@@ -255,6 +259,35 @@ void SoccerStars::reset_game() {
     ball->move_to_pos(pos);
     set_players_inital_pos();
     draw();
+}
+
+bool SoccerStars::has_impact() {
+    for (auto player : blue_players)
+        if (ball->has_impact_with(player)) return true;
+    for (auto player : red_players)
+        if (ball->has_impact_with(player)) return true;
+
+    for (int i = 0; i < blue_players.size(); i++) {
+        for (int j = i + 1; j < blue_players.size(); j++)
+            if (blue_players[i]->has_impact_with(blue_players[j])) return true;
+        for (auto player : red_players)
+            if (blue_players[i]->has_impact_with(player)) return true;
+    }
+
+    for (int i = 0; i < red_players.size(); i++) {
+        for (int j = i + 1; j < red_players.size(); j++)
+            if (red_players[i]->has_impact_with(red_players[j])) return true;
+        for (auto player : blue_players)
+            if (red_players[i]->has_impact_with(player)) return true;
+    }
+
+    if (!is_body_in_the_field(ball)) return true;
+
+    for (auto player : blue_players)
+        if (!is_body_in_the_field(player)) return true;
+
+    for (auto player : red_players)
+        if (!is_body_in_the_field(player)) return true;
 }
 
 bool SoccerStars::handle_bodies_impact() {
