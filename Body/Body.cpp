@@ -60,43 +60,6 @@ bool Body::has_impact_with(Body* body) {
 
 void Body::reflect_by(Body* body) {
     if (has_impact_with(body)) {
-        // if (body->v.x == 0 && body->v.y == 0 && v.x == 0 && v.y == 0) {
-        //     while (has_impact_with(body)) {
-        //         body->pos.x = body->pos.x - 5;
-        //         body->pos.y = body->pos.y - 5;
-        //         pos.x = pos.x - 5;
-        //         pos.y = pos.y - 5;
-        //     }
-        // }
-        body->pos.x = body->pos.x + body->v.x * FRAME_DURATION / 1000;
-        body->pos.y = body->pos.y + body->v.y * FRAME_DURATION / 1000;
-        pos.x = pos.x + v.x * FRAME_DURATION / 1000;
-        pos.y = pos.y + v.y * FRAME_DURATION / 1000;
-
-        // if (v.x > 0)
-        //     pos.x = pos.x -
-        //             v.x / abs(v.x) *
-        //                 (body->radius + radius - abs(body->pos.x - pos.x)) -
-        //             10;
-        // if (v.y > 0)
-        //     pos.y = pos.y -
-        //             v.y / abs(v.y) *
-        //                 (body->radius + radius - abs(body->pos.y - pos.y)) -
-        //             10;
-
-        // if (body->v.x > 0)
-        //     body->pos.x =
-        //         body->pos.x -
-        //         body->v.x / abs(body->v.x) *
-        //             (body->radius + radius - abs(body->pos.x - pos.x)) -
-        //         10;
-        // if (body->v.y > 0)
-        //     body->pos.y =
-        //         body->pos.y -
-        //         body->v.y / abs(body->v.y) *
-        //             (body->radius + radius - abs(body->pos.y - pos.y)) -
-        //         10;
-
         body->v.x =
             body->v.x -
             2 * mass / (mass + body->mass) *

@@ -8,6 +8,7 @@ SoccerStars::SoccerStars() {
     quit = false;
     turn = BLUE_TEAM;
     selected_player = NULL;
+    winner = -1;
 }
 
 void SoccerStars::get_rounds_number() {
@@ -154,7 +155,6 @@ void SoccerStars::handle_events() {
             break;
         case Event::LRELEASE:
             if (selected_player) {
-                // selected_player->move_to_pos(event.get_mouse_position());
                 throw_selected_player(event.get_mouse_position());
                 selected_player = NULL;
                 toggle_turn();
@@ -176,8 +176,6 @@ void SoccerStars::throw_selected_player(Point mouse_release_pos) {
 }
 
 void SoccerStars::move_all_bodies_one_frame() {
-    cout << "moving frame" << endl;
-    // cin.get();
     for (auto player : blue_players) {
         if (player->is_moving()) {
             player->move_one_frame();
@@ -213,29 +211,44 @@ velocity SoccerStars::calculate_initial_velocity(position from_pos,
 void SoccerStars::run_the_game() {
     draw();
     while (!any_team_won()) {
-        while (!any_team_won_in_round()) {
+        do {
             play_one_step();
+            check_goal();
             if (quit) return;
             delay(GAME_DELAY);
+        } while (any_team_won_in_round());
+    }
+    show_winner();
+    quit_game();
+}
+
+void SoccerStars::show_winner() {
+    if (winner == BLUE_TEAM) {
+        win->show_text("BLUE WON!!!", Point(220, 235), WHITE, GAME_FONT, 60);
+    } else if (winner == RED_TEAM) {
+        win->show_text(" RED WON!!!", Point(220, 235), WHITE, GAME_FONT, 60);
+    }
+    win->update_screen();
+    while (true) {
+        Event event = win->poll_for_event();
+        if (event.get_type() == Event::QUIT) {
+            quit = true;
+            break;
         }
     }
-    // show winner
-    quit_game();
 }
 
 void SoccerStars::play_one_step() {
     handle_events();
     while (is_all_bodies_moving()) {
         move_all_bodies_one_frame();
-        while (has_impact()) {
-            handle_impact_with_edges();
-            handle_bodies_impact();
-        }
+        // while (has_impact()) {
+        handle_impact_with_edges();
+        handle_bodies_impact();
+        // }
         draw();
         delay(GAME_DELAY);
     }
-    check_goal();
-    any_team_won_in_round();
 }
 
 void SoccerStars::check_goal() {
@@ -260,34 +273,53 @@ void SoccerStars::reset_game() {
     set_players_inital_pos();
     draw();
 }
-
-bool SoccerStars::has_impact() {
-    for (auto player : blue_players)
-        if (ball->has_impact_with(player)) return true;
-    for (auto player : red_players)
-        if (ball->has_impact_with(player)) return true;
-
-    for (int i = 0; i < blue_players.size(); i++) {
-        for (int j = i + 1; j < blue_players.size(); j++)
-            if (blue_players[i]->has_impact_with(blue_players[j])) return true;
-        for (auto player : red_players)
-            if (blue_players[i]->has_impact_with(player)) return true;
-    }
-
-    for (int i = 0; i < red_players.size(); i++) {
-        for (int j = i + 1; j < red_players.size(); j++)
-            if (red_players[i]->has_impact_with(red_players[j])) return true;
-        for (auto player : blue_players)
-            if (red_players[i]->has_impact_with(player)) return true;
-    }
-
-    if (!is_body_in_the_field(ball)) return true;
+bool SoccerStars::is_all_bodies_moving() {
+    if (ball->is_moving()) return true;
 
     for (auto player : blue_players)
-        if (!is_body_in_the_field(player)) return true;
+        if (player->is_moving()) return true;
 
     for (auto player : red_players)
-        if (!is_body_in_the_field(player)) return true;
+        if (player->is_moving()) return true;
+    return false;
+}
+
+bool SoccerStars::any_team_won() {
+    if (blue_rounds == rounds_number) {
+        winner = BLUE_TEAM;
+        return true;
+    }
+    if (red_rounds == rounds_number) {
+        winner = RED_TEAM;
+        return true;
+    }
+    return false;
+}
+
+bool SoccerStars::any_team_won_in_round() {
+    if (check_blue_rounds() || check_red_rounds()) {
+        draw();
+        return true;
+    }
+    return false;
+}
+
+bool SoccerStars::check_blue_rounds() {
+    if (blue_goals == goals_number) {
+        blue_rounds++;
+        blue_goals = 0;
+        return true;
+    } else
+        return false;
+}
+
+bool SoccerStars::check_red_rounds() {
+    if (red_goals == goals_number) {
+        red_rounds++;
+        red_goals = 0;
+        return true;
+    } else
+        return false;
 }
 
 bool SoccerStars::handle_bodies_impact() {
@@ -337,49 +369,6 @@ bool SoccerStars::is_body_in_the_field(Body* body) {
            body_pos.x < GAME_WIDTH - body->get_radius() &&
            body_pos.y > body->get_radius() &&
            body_pos.y < FIELD_HEIGHT - body->get_radius();
-}
-
-bool SoccerStars::is_all_bodies_moving() {
-    // if (ball->is_moving()) return true;
-    for (auto player : blue_players)
-        if (player->is_moving()) {
-            cout << "blue moving" << endl;
-            return true;
-        }
-    for (auto player : red_players)
-        if (player->is_moving()) {
-            cout << "red moving" << endl;
-            return true;
-        }
-    return false;
-}
-
-bool SoccerStars::any_team_won() {
-    if (blue_rounds == rounds_number) return true;
-    if (red_rounds == rounds_number) return true;
-    return false;
-}
-
-bool SoccerStars::any_team_won_in_round() {
-    return check_blue_rounds() || check_red_rounds();
-}
-
-bool SoccerStars::check_blue_rounds() {
-    if (blue_goals == goals_number) {
-        blue_rounds++;
-        blue_goals = 0;
-        return true;
-    } else
-        return false;
-}
-
-bool SoccerStars::check_red_rounds() {
-    if (red_goals == goals_number) {
-        red_rounds++;
-        red_goals = 0;
-        return true;
-    } else
-        return false;
 }
 
 void SoccerStars::quit_game() {

@@ -52,6 +52,7 @@ class SoccerStars {
     bool has_impact();
     void check_goal();
     void reset_game();
+    void show_winner();
 
    private:
     Window* win;
@@ -69,6 +70,7 @@ class SoccerStars {
     bool quit;
     int turn;
     Player* selected_player;
+    int winner;
 };
 
 #endif
