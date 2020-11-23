@@ -27,6 +27,13 @@ void SoccerStars::set_players_inital_pos() {
     }
 }
 
+void SoccerStars::create_players() {
+    for (auto pos : blue_inital_pos)
+        blue_players.push_back(new Player(pos, BLUE_PLAYER_IMG));
+    for (auto pos : red_inital_pos)
+        red_players.push_back(new Player(pos, RED_PLAYER_IMG));
+}
+
 void SoccerStars::read_initial_players_position() {
     ifstream fin;
     fin.open(PLAYERS_INITIAL_POSITION);
@@ -37,7 +44,6 @@ void SoccerStars::read_initial_players_position() {
         pos.x = x;
         pos.y = y;
         blue_inital_pos.push_back(pos);
-        blue_players.push_back(new Player(pos, BLUE_PLAYER_IMG));
     }
     for (int i = 0; i < NUMBER_OF_TEAM_PLAYERS; i++) {
         fin >> x >> y;
@@ -45,7 +51,6 @@ void SoccerStars::read_initial_players_position() {
         pos.x = x;
         pos.y = y;
         blue_inital_pos.push_back(pos);
-        red_players.push_back(new Player(pos, RED_PLAYER_IMG));
     }
 
     fin.close();
@@ -60,6 +65,7 @@ void SoccerStars::run() {
 void SoccerStars::initialize_game() {
     win = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
     // win->play_music(MUSIC_PATH);
+    create_players();
     position pos;
     pos.x = BALL_INITIAL_X;
     pos.y = BALL_INITIAL_Y;

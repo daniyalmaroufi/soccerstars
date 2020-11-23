@@ -22,6 +22,8 @@ class SoccerStars {
     void get_rounds_number();
     void get_goals_number();
     void read_initial_players_position();
+    void set_players_inital_pos();
+    void create_players();
     void initialize_game();
     void set_up_background();
     Rectangle get_field_box();
@@ -49,7 +51,6 @@ class SoccerStars {
     bool handle_bodies_impact();
     void check_goal();
     void reset_game();
-    void set_players_inital_pos();
 
    private:
     Window* win;
