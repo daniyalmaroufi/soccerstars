@@ -19,8 +19,10 @@
 #define BALL_INITIAL_Y 240
 #define GAME_FONT "Assets/game_font.ttf"
 #define FONT_SIZE 25
-#define BLUE_SCORES_POS 160
-#define RED_SCORES_POS 560
+#define BLUE_GOALS_POS 30
+#define BLUE_ROUNDS_POS 230
+#define RED_GOALS_POS 430
+#define RED_ROUNDS_POS 630
 #define BLUE_TEAM 0
 #define RED_TEAM 1
 #define GAME_FPS 25
