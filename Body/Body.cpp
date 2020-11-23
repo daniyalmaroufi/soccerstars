@@ -49,25 +49,6 @@ bool Body::is_moving() {
 
 int Body::get_radius() { return radius; }
 
-void Body::reflect_with_edges() {
-    if (pos.x < radius) {
-        pos.x = 2 * radius - pos.x;
-        v.x = -v.x;
-    }
-    if (pos.x > GAME_WIDTH - radius) {
-        pos.x = 2 * (GAME_WIDTH - radius) - pos.x;
-        v.x = -v.x;
-    }
-    if (pos.y < radius) {
-        pos.y = 2 * radius - pos.y;
-        v.y = -v.y;
-    }
-    if (pos.y > FIELD_HEIGHT - radius) {
-        pos.y = 2 * (FIELD_HEIGHT - radius) - pos.y;
-        v.y = -v.y;
-    }
-}
-
 bool Body::has_impact_with(Body* body) {
     if (sqrt(pow(pos.x - body->pos.x, 2) + pow(pos.y - body->pos.y, 2)) >
         radius + body->radius)

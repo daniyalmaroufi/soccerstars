@@ -11,6 +11,9 @@ class Ball : public Body {
     Ball(){};
     void draw(Window *win);
     void update(Window *win);
+    void reflect_with_edges();
+    bool is_goal();
+    int who_scored();
 
    private:
 };

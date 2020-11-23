@@ -9,8 +9,8 @@
 #define PLAYER_RADIUS 15
 #define PLAYERS_INITIAL_POSITION "./players_initial_position.txt"
 #define NUMBER_OF_TEAM_PLAYERS 5
-#define PLAYER1_PATH "Assets/Player1.png"
-#define PLAYER2_PATH "Assets/Player2.png"
+#define BLUE_PLAYER_IMG "Assets/Player1.png"
+#define RED_PLAYER_IMG "Assets/Player2.png"
 #define GAME_DELAY 15
 #define BALL_IMAGE "Assets/ball.png"
 #define MUSIC_PATH "Assets/music.mp3"
@@ -21,8 +21,8 @@
 #define FONT_SIZE 25
 #define BLUE_SCORES_POS 160
 #define RED_SCORES_POS 560
-#define BLUE_TURN 0
-#define RED_TURN 1
+#define BLUE_TEAM 0
+#define RED_TEAM 1
 #define GAME_FPS 25
 #define FRAME_DURATION 40
 #define THROW_RADIUS 60

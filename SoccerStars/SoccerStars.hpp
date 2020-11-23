@@ -47,14 +47,19 @@ class SoccerStars {
     void handle_impact_with_edges();
     bool is_body_in_the_field(Body* body);
     bool handle_bodies_impact();
+    void check_goal();
+    void reset_game();
+    void set_players_inital_pos();
 
    private:
     Window* win;
     Ball* ball;
-    std::vector<Player*> blue_players;
+    vector<position> blue_inital_pos;
+    vector<Player*> blue_players;
     int blue_goals;
     int blue_rounds;
-    std::vector<Player*> red_players;
+    vector<position> red_inital_pos;
+    vector<Player*> red_players;
     int red_goals;
     int red_rounds;
     int rounds_number;

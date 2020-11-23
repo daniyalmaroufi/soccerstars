@@ -13,6 +13,7 @@ class Player : public Body {
     Player(){};
     void draw(Window *win);
     bool is_in_pos(Point pos);
+    void reflect_with_edges();
 
    private:
     std::string player_image;

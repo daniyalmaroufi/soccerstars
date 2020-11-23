@@ -17,7 +17,6 @@ class Body {
     void set_velocity(velocity v_);
     void move_one_frame();
     bool is_moving();
-    void reflect_with_edges();
     bool has_impact_with(Body* body);
     void reflect_by(Body* body);
 

@@ -6,7 +6,7 @@ SoccerStars::SoccerStars() {
     blue_rounds = 0;
     red_rounds = 0;
     quit = false;
-    turn = BLUE_TURN;
+    turn = BLUE_TEAM;
     selected_player = NULL;
 }
 
@@ -20,6 +20,13 @@ void SoccerStars::get_goals_number() {
     cin >> goals_number;
 }
 
+void SoccerStars::set_players_inital_pos() {
+    for (int i = 0; i < NUMBER_OF_TEAM_PLAYERS; i++) {
+        blue_players[i]->move_to_pos(blue_inital_pos[i]);
+        red_players[i]->move_to_pos(red_inital_pos[i]);
+    }
+}
+
 void SoccerStars::read_initial_players_position() {
     ifstream fin;
     fin.open(PLAYERS_INITIAL_POSITION);
@@ -29,14 +36,16 @@ void SoccerStars::read_initial_players_position() {
         position pos;
         pos.x = x;
         pos.y = y;
-        blue_players.push_back(new Player(pos, PLAYER1_PATH));
+        blue_inital_pos.push_back(pos);
+        blue_players.push_back(new Player(pos, BLUE_PLAYER_IMG));
     }
     for (int i = 0; i < NUMBER_OF_TEAM_PLAYERS; i++) {
         fin >> x >> y;
         position pos;
         pos.x = x;
         pos.y = y;
-        red_players.push_back(new Player(pos, PLAYER2_PATH));
+        blue_inital_pos.push_back(pos);
+        red_players.push_back(new Player(pos, RED_PLAYER_IMG));
     }
 
     fin.close();
@@ -111,19 +120,19 @@ Player* SoccerStars::find_player_by_pos(vector<Player*> players, Point pos) {
 }
 
 Player* SoccerStars::select_player(Point mouse_click_pos) {
-    if (turn == BLUE_TURN) {
+    if (turn == BLUE_TEAM) {
         return find_player_by_pos(blue_players, mouse_click_pos);
     }
-    if (turn == RED_TURN) {
+    if (turn == RED_TEAM) {
         return find_player_by_pos(red_players, mouse_click_pos);
     }
 }
 
 void SoccerStars::toggle_turn() {
-    if (turn == BLUE_TURN)
-        turn = RED_TURN;
+    if (turn == BLUE_TEAM)
+        turn = RED_TEAM;
     else
-        turn = BLUE_TURN;
+        turn = BLUE_TEAM;
 }
 
 void SoccerStars::handle_events() {
@@ -211,6 +220,27 @@ void SoccerStars::play_one_step() {
         draw();
         delay(GAME_DELAY);
     }
+    check_goal();
+}
+
+void SoccerStars::check_goal() {
+    if (ball->is_goal()) {
+        if (ball->who_scored() == BLUE_TEAM) {
+            blue_goals += 1;
+            turn = RED_TEAM;
+        } else if (ball->who_scored() == RED_TEAM) {
+            red_goals += 1;
+            turn = BLUE_TEAM;
+        }
+        reset_game();
+    }
+}
+
+void SoccerStars::reset_game() {
+    position pos;
+    pos.x = BALL_INITIAL_X;
+    pos.y = BALL_INITIAL_Y;
+    ball->move_to_pos(pos);
 }
 
 bool SoccerStars::handle_bodies_impact() {

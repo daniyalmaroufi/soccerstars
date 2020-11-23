@@ -13,3 +13,22 @@ bool Player::is_in_pos(Point pos_) {
             return true;
     return false;
 }
+
+void Player::reflect_with_edges() {
+    if (pos.x < radius) {
+        pos.x = 2 * radius - pos.x;
+        v.x = -v.x;
+    }
+    if (pos.x > GAME_WIDTH - radius) {
+        pos.x = 2 * (GAME_WIDTH - radius) - pos.x;
+        v.x = -v.x;
+    }
+    if (pos.y < radius) {
+        pos.y = 2 * radius - pos.y;
+        v.y = -v.y;
+    }
+    if (pos.y > FIELD_HEIGHT - radius) {
+        pos.y = 2 * (FIELD_HEIGHT - radius) - pos.y;
+        v.y = -v.y;
+    }
+}
