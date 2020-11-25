@@ -64,7 +64,7 @@ void SoccerStars::run() {
 
 void SoccerStars::initialize_game() {
     win = new Window(GAME_WIDTH, GAME_HEIGHT, GAME_NAME);
-    // win->play_music(MUSIC_PATH);
+    win->play_music(MUSIC_PATH);
     create_players();
     position pos;
     pos.x = BALL_INITIAL_X;
