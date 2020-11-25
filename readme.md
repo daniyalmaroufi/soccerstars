@@ -7,6 +7,7 @@ Just a simple version of Soccer Stars Game.
 ```bash
 git clone https://github.com/daniyalmarofi/soccerstars.git
 cd soccerstars
+mkdir obj
 make
 ./soccerStars.out
 ```
